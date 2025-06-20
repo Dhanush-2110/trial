@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Amity University Bangalore</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation styles */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-bar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-bar a:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+        }
+
+        .nav-bar a.active {
+            background-color: #ffd700;
+            color: #000000;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            z-index: 1000;
+            animation: slideDown 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover::after,
+        .nav-links li a.active::after {
+            width: 100%;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 20px 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #cccccc;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* About Content */
+        .about-content {
+            display: grid;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .content-section {
+            background: rgba(255, 215, 0, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s ease;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            font-size: 2.5rem;
+        }
+
+        .section-text {
+            color: #cccccc;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .stat-card {
+            background: rgba(255, 215, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: scaleIn 1s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: #ffd700;
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        /* Team Section */
+        .team-section {
+            margin-bottom: 80px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-card {
+            background: rgba(255, 215, 0, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 20px;
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            color: #cccccc;
+            margin-bottom: 15px;
+        }
+
+        .team-description {
+            color: #aaaaaa;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 2000;
+        }
+
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            }
+            50% {
+                box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+            }
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chatbot-header {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #000000;
+            padding: 15px 20px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #000000;
+        }
+
+        .chatbot-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .quick-questions {
+            margin-bottom: 20px;
+        }
+
+        .quick-questions h4 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .question-btn {
+            display: block;
+            width: 100%;
+            padding: 10px 15px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            color: #ffffff;
+            text-align: left;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .question-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+            transform: translateX(5px);
+        }
+
+        .chat-messages {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 15px;
+            border-radius: 15px;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .user-message {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #000000;
+            margin-left: 20px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .bot-message {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffffff;
+            margin-right: 20px;
+            border-bottom-left-radius: 5px;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px 12px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+
+        .send-btn {
+            padding: 10px 15px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border: none;
+            border-radius: 20px;
+            color: #000000;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                padding: 100px 15px 30px;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chatbot-window {
+                width: 320px;
+                height: 450px;
+            }
+
+            .chatbot-container {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">AMITY BANGALORE</div>
+            <ul class="nav-links">
+                <li><a href="front.html">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Animated Background Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">About Amity University</h1>
+            <p class="hero-subtitle">
+                Discover the legacy of excellence, innovation, and academic leadership that defines Amity University Bangalore. 
+                We are committed to nurturing tomorrow's leaders through world-class education and transformative experiences.
+            </p>
+        </section>
+
+        <!-- About Content -->
+        <div class="about-content">
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-icon">🎓</span>
+                    Our Mission
+                </h2>
+                <p class="section-text">
+                    At Amity University Bangalore, we are dedicated to providing world-class education that combines academic excellence with practical learning. Our mission is to develop globally competent professionals who are equipped with the knowledge, skills, and values necessary to excel in their chosen fields and contribute meaningfully to society. We strive to create an environment that fosters innovation, critical thinking, and lifelong learning.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-icon">🌟</span>
+                    Our Vision
+                </h2>
+                <p class="section-text">
+                    To be a leading global university that transforms lives through quality education, cutting-edge research, and innovative solutions. We envision ourselves as a catalyst for positive change, nurturing leaders who will shape the future of business, technology, and society. Our commitment extends beyond academic excellence to include character building, ethical leadership, and social responsibility.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-icon">🏛️</span>
+                    Our Heritage
+                </h2>
+                <p class="section-text">
+                    Established with a vision to provide world-class education in India, Amity University has grown to become one of the most respected educational institutions in the country. Our Bangalore campus represents the perfect blend of traditional values and modern educational methodologies. With state-of-the-art infrastructure, renowned faculty, and industry partnerships, we have consistently maintained our position as a premier educational destination.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-icon">🚀</span>
+                    Innovation & Excellence
+                </h2>
+                <p class="section-text">
+                    Innovation is at the heart of everything we do. From cutting-edge research laboratories to industry-integrated curriculum, we ensure our students are always ahead of the curve. Our centers of excellence in AI, biotechnology, business, and engineering provide students with opportunities to work on real-world projects and collaborate with industry leaders. We believe in learning by doing, and our hands-on approach prepares students for the challenges of tomorrow.
+                </p>
+            </section>
+        </div>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number">15,000+</div>
+                <div class="stat-label">Active Students</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Expert Faculty</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Programs Offered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Placement Rate</div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="content-section">
+                <h2 class="section-title">
+                    <span class="section-icon">👥</span>
+                    Event Portal Team
+                </h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-avatar">👨‍💼</div>
+                        <div class="team-name">Dr. Rajesh Kumar</div>
+                        <div class="team-role">Director, Student Affairs</div>
+                        <div class="team-description">Leading student engagement initiatives and overseeing all university events with 15+ years of experience in higher education.</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">👩‍💻</div>
+                        <div class="team-name">Prof. Priya Sharma</div>
+                        <div class="team-role">Event Coordination Head</div>
+                        <div class="team-description">Expert in event management and student activities, ensuring seamless execution of all cultural and academic events.</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">👨‍🎓</div>
+                        <div class="team-name">Mr. Arjun Patel</div>
+                        <div class="team-role">Technical Support Manager</div>
+                        <div class="team-description">Ensuring all technical aspects of events run smoothly, from AV equipment to live streaming and digital integration.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <span>Amity Assistant</span>
+                <button class="chatbot-close" onclick="toggleChatbot()">×</button>
+            </div>
+            <div class="chatbot-body">
+                <div class="quick-questions">
+                    <h4>Quick Questions:</h4>
+                    <button class="question-btn" onclick="askQuestion('What programs does Amity offer?')">What programs does Amity offer?</button>
+                    <button class="question-btn" onclick="askQuestion('How do I register for events?')">How do I register for events?</button>
+                    <button class="question-btn" onclick="askQuestion('What are the admission requirements?')">What are the admission requirements?</button>
+                    <button class="question-btn" onclick="askQuestion('Tell me about campus facilities')">Tell me about campus facilities</button>
+                    <button class="question-btn" onclick="askQuestion('How can I contact support?')">How can I contact support?</button>
+                </div>
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input">
+                    <input type="text" id="chatInput" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
+                    <button class="send-btn" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chatbot responses
+        const responses = {
+            "what programs does amity offer": "Amity University Bangalore offers 50+ programs including Engineering, Management, Law, Arts & Sciences, Journalism, and specialized courses in AI, Data Science, and Biotechnology. Our programs are designed with industry collaboration and focus on practical learning.",
+            
+            "how do i register for events": "Event registration is simple! Visit our Events page, browse available events, click 'Book Now' on your desired event, and fill out the registration form with your details, number of attendees, and preferences. You'll receive a confirmation email with your booking ID.",
+            
+            "what are the admission requirements": "Admission requirements vary by program. Generally, you need to complete your 12th grade with required percentage, clear entrance exams (JEE, NEET, etc. for specific courses), and participate in our counseling process. Visit our admissions office or website for detailed program-specific requirements.",
+            
+            "tell me about campus facilities": "Our state-of-the-art campus features modern classrooms, research labs, library with 100,000+ books, sports complex, cafeteria, hostels, medical center, auditoriums, and recreational facilities. We also have dedicated spaces for cultural activities and student organizations.",
+            
+            "how can i contact support": "You can reach us at: 📧 info@amity.edu | 📞 +91-80-4012-3456 | 📍 Amity University, Bangalore Campus, Electronic City. Our support team is available Mon-Fri 9 AM to 6 PM. For urgent event-related queries, use our 24/7 helpline.",
+            
+            "default": "Thank you for your question! For detailed information, please contact our support team at info@amity.edu or call +91-80-4012-3456. You can also visit our main website or contact the admissions office directly."
+        };
+
+        let chatbotOpen = false;
+
+        // Initialize particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 40;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Toggle chatbot
+        function toggleChatbot() {
+            const window = document.getElementById('chatbotWindow');
+            chatbotOpen = !chatbotOpen;
+            window.style.display = chatbotOpen ? 'flex' : 'none';
+            
+            if (chatbotOpen && document.getElementById('chatMessages').children.length === 0) {
+                addMessage("Hello! I'm your Amity Assistant. How can I help you today? You can click on the quick questions above or type your own question.", 'bot');
+            }
+        }
+
+        // Add message to chat
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.textContent = text;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Ask predefined question
+        function askQuestion(question) {
+            addMessage(question, 'user');
+            setTimeout(() => {
+                const key = question.toLowerCase();
+                const response = responses[key] || responses["default"];
+                addMessage(response, 'bot');
+            }, 500);
+        }
+
+        // Send custom message
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                input.value = '';
+                
+                setTimeout(() => {
+                    const key = message.toLowerCase();
+                    let response = responses["default"];
+                    
+                    // Simple keyword matching
+                    for (let responseKey in responses) {
+                        if (key.includes(responseKey.split(' ')[0]) || key.includes(responseKey)) {
+                            response = responses[responseKey];
+                            break;
+                        }
+                    }
+                    
+                    addMessage(response, 'bot');
+                }, 500);
+            }
+        }
+
+        // Handle enter key press
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Add parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                const speed = 0.05 + (index % 3) * 0.02;
+                section.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            createParticles();
+        });
+    </script>
+</body>
+</html>
